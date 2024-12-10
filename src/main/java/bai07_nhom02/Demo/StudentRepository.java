@@ -1,4 +1,4 @@
-package Demo;
+package bai07_nhom02.Demo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

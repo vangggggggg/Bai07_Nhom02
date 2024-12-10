@@ -1,6 +1,5 @@
-package Demo;
+package bai07_nhom02.Demo;
 
-import Demo.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

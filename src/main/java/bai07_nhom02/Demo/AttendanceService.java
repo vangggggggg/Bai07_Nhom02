@@ -1,6 +1,5 @@
-package Demo;
+package bai07_nhom02.Demo;
 
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +36,7 @@ public class AttendanceService {
         for (Student student : students) {
             String subject = "Cảnh báo vắng học";
             String body = "Sinh viên " + student.getName() + " đã vắng mặt quá 3 buổi liên tiếp.";
-            emailService.sendEmail(student.getParentEmail(), subject, body);
+            emailService.sendSimpleEmail(student.getParentEmail(), subject, body);
         }
     }
 

@@ -1,4 +1,4 @@
-package Demo;
+package bai07_nhom02.Demo;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,25 +6,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "attendance")
-public class Attendance {
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "students")
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Student student;
+    private String name;
 
-    private LocalDate date;
+    private String email;
 
-    private boolean present;
+    private String parentEmail;
+
+    public Student(Long studentId) {
+        this.id = studentId;
+    }
 
     // Getters and Setters
 }

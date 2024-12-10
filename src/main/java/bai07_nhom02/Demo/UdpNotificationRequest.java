@@ -1,4 +1,4 @@
-package Demo;
+package bai07_nhom02.Demo;
 
 public class UdpNotificationRequest {
     private String message;
