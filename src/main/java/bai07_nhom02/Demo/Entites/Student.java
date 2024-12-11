@@ -23,6 +23,10 @@ public class Student {
 
     private String parentEmail;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_id", nullable = true)
+    private Parent parent;
+
 
     public Student(Long studentId) {
         this.id = studentId;

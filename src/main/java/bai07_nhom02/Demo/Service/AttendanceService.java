@@ -58,5 +58,9 @@ public class AttendanceService {
     public List<Object[]> getCoursesWithHighAbsence() {
         return attendanceRepository.findCoursesWithHighAbsence();
     }
+
+    public List<Object[]> getDateAbsent(Long id){
+       return attendanceRepository.findByStudentIdDate(id);
+    }
 }
 

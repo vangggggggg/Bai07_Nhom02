@@ -23,15 +23,24 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
     // Tìm dữ liệu điểm danh theo sinh viên
     List<Attendance> findByStudentId(Long studentId);
 
+    @Query("SELECT a.date FROM Attendance a WHERE a.student.id = :studentId")
+    List<Object[]> findByStudentIdDate(@Param("studentId") Long studentId);
+
     // Lấy danh sách điểm danh theo ngày cụ thể
     List<Attendance> findByDate(LocalDate date);
-    @Query("SELECT s.id, s.name, COUNT(a.id) AS absenceCount " +
+
+    @Query("SELECT s.id, s.name, p.email, p.name, " +
+            "COUNT(CASE WHEN a.status = 'Absent' THEN 1 END) AS absenceCount, " +
+            "COUNT(CASE WHEN a.status = 'Present' THEN 1 END) AS presenceCount " +
             "FROM Student s " +
+            "JOIN s.parent p " +
             "JOIN Attendance a ON a.student.id = s.id " +
-            "WHERE a.status = 'Absent' " +
-            "GROUP BY s.id, s.name " +
-            "HAVING COUNT(a.id) >= :threshold")
+            "GROUP BY s.id, s.name, p.email, p.name " +
+            "HAVING COUNT(CASE WHEN a.status = 'Absent' THEN 1 END) >= :threshold"
+    )
     List<Object[]> findStudentsWithHighAbsence(@Param("threshold") int threshold);
+
+
 
     @Query("SELECT a.course.id, COUNT(a.id) AS absentCount " +
             "FROM Attendance a WHERE a.status = 'Absent' " +
