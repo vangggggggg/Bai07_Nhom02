@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Attendance List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Attendance List</h1>
+
+    <!-- Bảng danh sách Attendance -->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="attendance : ${attendances}">
+            <td th:text="${attendance.id}"></td>
+            <td th:text="${attendance.student.name}"></td>
+            <td th:text="${attendance.course.name}"></td>
+            <td th:text="${attendance.date}"></td>
+            <td th:text="${attendance.status}"></td>
+            <td th:text="${attendance.score}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Thống kê số ngày vắng học -->
+    <h2 class="mt-5">Absent Statistics</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Student</th>
+            <th>Days Absent</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${absentStatistics}">
+            <td th:text="${entry.key}"></td>
+            <td th:text="${entry.value}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

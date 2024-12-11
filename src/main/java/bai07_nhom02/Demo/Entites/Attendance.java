@@ -40,5 +40,5 @@ public class Attendance {
 
     private Boolean present;
 
-
+    private double score;
 }
