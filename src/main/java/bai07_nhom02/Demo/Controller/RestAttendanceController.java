@@ -97,7 +97,7 @@ public class RestAttendanceController {
 
         model.addAttribute("attendances", attendances);
         model.addAttribute("absentStatistics", absentStatistics);
-        return "attendance/index";
+        return "templates/attendance/index";
     }
 }
 
