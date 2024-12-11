@@ -1,4 +1,4 @@
-package bai07_nhom02.Demo;
+package bai07_nhom02.Demo.DTO;
 
 import java.time.LocalDate;
 

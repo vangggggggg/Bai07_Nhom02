@@ -1,5 +1,8 @@
-package bai07_nhom02.Demo;
+package bai07_nhom02.Demo.Service;
 
+import bai07_nhom02.Demo.Entites.Attendance;
+import bai07_nhom02.Demo.Entites.Student;
+import bai07_nhom02.Demo.Repo.AttendanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +49,14 @@ public class AttendanceService {
         attendance.setDate(date);
         attendance.setPresent(present);
         attendanceRepository.save(attendance);
+    }
+
+    public List<Object[]> getStudentsWithHighAbsence(int threshold) {
+        return attendanceRepository.findStudentsWithHighAbsence(threshold);
+    }
+
+    public List<Object[]> getCoursesWithHighAbsence() {
+        return attendanceRepository.findCoursesWithHighAbsence();
     }
 }
 

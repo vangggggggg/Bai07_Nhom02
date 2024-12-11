@@ -1,5 +1,12 @@
-package bai07_nhom02.Demo;
+package bai07_nhom02.Demo.Controller;
 
+import bai07_nhom02.Demo.DTO.AttendanceRequest;
+import bai07_nhom02.Demo.DTO.UdpNotificationRequest;
+import bai07_nhom02.Demo.Entites.Attendance;
+import bai07_nhom02.Demo.Entites.Student;
+import bai07_nhom02.Demo.Service.AttendanceService;
+import bai07_nhom02.Demo.Service.StudentService;
+import bai07_nhom02.Demo.Service.UdpNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +70,16 @@ public class AttendanceController {
     public ResponseEntity<String> sendUdpNotification(@RequestBody UdpNotificationRequest request) {
         udpNotificationService.sendUdpNotification(request.getMessage(), request.getIpAddress(), request.getPort());
         return ResponseEntity.ok("Thông báo UDP đã được gửi.");
+    }
+
+    @GetMapping("/students/high-absence")
+    public List<Object[]> getStudentsWithHighAbsence(@RequestParam int threshold) {
+        return attendanceService.getStudentsWithHighAbsence(threshold);
+    }
+
+    @GetMapping("/courses/high-absence")
+    public List<Object[]> getCoursesWithHighAbsence() {
+        return attendanceService.getCoursesWithHighAbsence();
     }
 }
 

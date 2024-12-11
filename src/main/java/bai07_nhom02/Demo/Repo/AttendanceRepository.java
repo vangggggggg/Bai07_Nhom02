@@ -1,7 +1,10 @@
-package bai07_nhom02.Demo;
+package bai07_nhom02.Demo.Repo;
 
+import bai07_nhom02.Demo.Entites.Attendance;
+import bai07_nhom02.Demo.Entites.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -22,4 +25,16 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
     // Lấy danh sách điểm danh theo ngày cụ thể
     List<Attendance> findByDate(LocalDate date);
+    @Query("SELECT s.id, s.name, COUNT(a.id) AS absenceCount " +
+            "FROM Student s " +
+            "JOIN Attendance a ON a.student.id = s.id " +
+            "WHERE a.status = 'Absent' " +
+            "GROUP BY s.id, s.name " +
+            "HAVING COUNT(a.id) >= :threshold")
+    List<Object[]> findStudentsWithHighAbsence(@Param("threshold") int threshold);
+
+    @Query("SELECT a.course.id, COUNT(a.id) AS absentCount " +
+            "FROM Attendance a WHERE a.status = 'Absent' " +
+            "GROUP BY a.course.id ORDER BY absentCount DESC")
+    List<Object[]> findCoursesWithHighAbsence();
 }

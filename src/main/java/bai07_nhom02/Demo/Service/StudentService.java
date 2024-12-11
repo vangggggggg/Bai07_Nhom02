@@ -1,5 +1,7 @@
-package bai07_nhom02.Demo;
+package bai07_nhom02.Demo.Service;
 
+import bai07_nhom02.Demo.Entites.Student;
+import bai07_nhom02.Demo.Repo.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
